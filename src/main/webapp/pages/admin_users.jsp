@@ -15,13 +15,13 @@
 </div>
 <div class="form_container" align="center">
         <input id="firstName" name="firstName" placeholder="first name"/>
-        <input id="lastName" name="lastName" placeholder="first name"/>
+        <input id="lastName" name="lastName" placeholder="last name"/>
         <select id="role">
             <option value=''>   </option>
             <option value='TEACHER'>teacher</option>
             <option value='STUDENT'>student</option>
         </select>
-        <input id="email" name="email" placeholder="first name"/>
+        <input id="email" name="email" placeholder="email"/>
 
     <button onclick="search()">do search!</button>
 </div>
@@ -56,15 +56,6 @@
         document.getElementById("list").innerHTML =list;
 
 
-    }
-
-    var close = document.getElementsByClassName("close");
-    var i;
-    for (i = 0; i < close.length; i++) {
-        close[i].onclick = function() {
-            var div = this.parentElement;
-            div.style.display = "none";
-        }
     }
 
     var list = document.querySelector('ul');

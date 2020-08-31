@@ -6,9 +6,9 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class AcademicUser extends User{
-    private boolean emailVerificationStatus;
-    private boolean adminVerificationStatus;
+public class AcademicUser extends User {
+    boolean emailVerificationStatus;
+    boolean adminVerificationStatus;
 
     public AcademicUser(String firstName, String lastName,
                         String email, String password, boolean emailVerificationStatus,

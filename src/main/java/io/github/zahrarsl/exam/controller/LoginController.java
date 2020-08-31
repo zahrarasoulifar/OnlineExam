@@ -54,15 +54,15 @@ public class LoginController {
                         modelAndView.addObject("user_state", academicUserService.getState(user.getId()));
                         break;
                     default:
-                        modelAndView = new ModelAndView("error",
+                        modelAndView = new ModelAndView("error1",
                                 "message", "user authority is unavailable");
                 }
             } catch (Exception e) {
-                modelAndView = new ModelAndView("error",
+                modelAndView = new ModelAndView("error1",
                         "message", e.getMessage());
             }
         } else {
-            modelAndView = new ModelAndView("error",
+            modelAndView = new ModelAndView("error1",
                     "message", "please login.");
         }
         return modelAndView;

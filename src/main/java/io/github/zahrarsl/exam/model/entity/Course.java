@@ -14,9 +14,9 @@ public class Course {
     private String number;
     private String category;
     @ManyToMany
-    private List<AcademicUser> teachers;
+    private List<Teacher> teachers;
     @ManyToMany
-    private List<AcademicUser> students;
+    private List<Student> students;
 
     public int getId() {
         return id;
@@ -26,19 +26,19 @@ public class Course {
         this.id = id;
     }
 
-    public List<AcademicUser> getTeachers() {
+    public List<Teacher> getTeachers() {
         return teachers;
     }
 
-    public void setTeachers(List<AcademicUser> teachers) {
+    public void setTeachers(List<Teacher> teachers) {
         this.teachers = teachers;
     }
 
-    public List<AcademicUser> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(List<AcademicUser> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 

@@ -63,7 +63,7 @@ public class AdminRestController {
     }
 
     @DeleteMapping(value = "/delete/{userId}", produces = "text/html")
-    public ResponseEntity saveNewStudent(@PathVariable("userId") String id){
+    public ResponseEntity deleteStudent(@PathVariable("userId") String id){
         try {
             academicUserService.deleteUser(Integer.parseInt(id));
             return ResponseEntity.ok()
@@ -73,4 +73,19 @@ public class AdminRestController {
                     .body("error: " + e.getMessage());
         }
     }
+
+    @PostMapping(value = "/add", consumes = "application/json", produces = "text/html")
+    public ResponseEntity addAdmin(@RequestBody Admin admin) {
+        try {
+            adminService.save(admin);
+            return ResponseEntity.ok()
+                    .body("admin added successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("error: " + e.getMessage());
+        }
+
+    }
+
+
 }

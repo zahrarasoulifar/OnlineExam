@@ -53,7 +53,7 @@ public class AcademicUserController {
     public String signup(@ModelAttribute("academicUser") AcademicUser academicUser,
                          Model model) {
         try {
-            academicUserService.save(academicUser);
+            academicUser = academicUserService.save(academicUser);
             ConfirmationToken confirmationToken = new ConfirmationToken(academicUser);
 
             confirmationTokenDao.save(confirmationToken);
@@ -71,11 +71,11 @@ public class AcademicUserController {
                 return "email_sent";
             } catch (Exception e) {
                 model.addAttribute("message", "invalid email address. cannot send email.");
-                return "error";
+                return "error1";
             }
         } catch (Exception e) {
             model.addAttribute("message", e.getMessage());
-            return "error";
+            return "error1";
         }
 
     }

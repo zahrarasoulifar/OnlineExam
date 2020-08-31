@@ -44,7 +44,7 @@ public class AdminController {
             return new ModelAndView("admin_user", "user", user);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ModelAndView("error", "message",
+            return new ModelAndView("error1", "message",
                     "error happened while processing your request ");
         }
 
@@ -53,7 +53,7 @@ public class AdminController {
 
     @RequestMapping(value = "/signup_page", method = RequestMethod.GET)
     public ModelAndView getAdminSignupPage(){
-        return new ModelAndView("admin_signup", "user", new User());
+        return new ModelAndView("admin_signup" );
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
@@ -82,7 +82,7 @@ public class AdminController {
             e.printStackTrace();
             resultMessage = "error happened user was not added!";
         }
-        modelAndView = new ModelAndView("admin_signup", "user", new User());
+        modelAndView = new ModelAndView("admin_signup");
         modelAndView.addObject("add_message", resultMessage);
         return modelAndView;
     }
@@ -104,9 +104,9 @@ public class AdminController {
 
     @RequestMapping(value = "/home")
     public ModelAndView getAdminHome(){
-        User user = new User();
-        user.setFirstName("Admin");
-        return new ModelAndView("admin_home", "user", user);
+        Admin admin = new Admin();
+        admin.setFirstName("Admin");
+        return new ModelAndView("admin_home", "user", admin);
     }
 
 }

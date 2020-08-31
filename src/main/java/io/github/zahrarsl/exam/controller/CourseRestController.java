@@ -2,14 +2,14 @@ package io.github.zahrarsl.exam.controller;
 
 import io.github.zahrarsl.exam.model.entity.AcademicUser;
 import io.github.zahrarsl.exam.model.entity.Course;
-import io.github.zahrarsl.exam.service.AcademicUserService;
+import io.github.zahrarsl.exam.model.entity.Student;
+import io.github.zahrarsl.exam.model.entity.Teacher;
 import io.github.zahrarsl.exam.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,16 +18,10 @@ import java.util.List;
 public class CourseRestController {
 
     private CourseService courseService;
-    private AcademicUserService academicUserService;
 
     @Autowired
     public void setCourseService(CourseService courseService) {
         this.courseService = courseService;
-    }
-
-    @Autowired
-    public void setAcademicUserService(AcademicUserService academicUserService) {
-        this.academicUserService = academicUserService;
     }
 
     @RequestMapping(value = "/getCourses", produces = "application/json")
@@ -54,12 +48,12 @@ public class CourseRestController {
     }
 
     @GetMapping(value = "/getCourseTeachers/{courseId}")
-    public List<AcademicUser> getCourseTeachers(@PathVariable("courseId") String id) {
+    public List<Teacher> getCourseTeachers(@PathVariable("courseId") String id) {
         return courseService.getCourseTeachers(Integer.parseInt(id));
     }
 
     @GetMapping(value = "/getCourseStudents/{courseId}")
-    public List<AcademicUser> getCourseStudents(@PathVariable("courseId") String id) {
+    public List<Student> getCourseStudents(@PathVariable("courseId") String id) {
         return courseService.getCourseStudents(Integer.parseInt(id));
     }
 
@@ -76,27 +70,15 @@ public class CourseRestController {
         }
     }
 
-    @PutMapping(value = "/addStudent/{courseId}/{studentId}")
-    public ResponseEntity addStudentToCourse(@PathVariable("courseId") String courseId,
-                                             @PathVariable("studentId") String studentId) {
-        try {
-            courseService.addStudentToCourse(Integer.parseInt(courseId), Integer.parseInt(studentId));
-            return ResponseEntity.ok()
-                    .body("student added.");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                    .body("error " + e.getMessage());
-        }
-    }
-
     @PutMapping(value = "/addUser/{courseId}/{userId}")
     public ResponseEntity addUserToCourse(@PathVariable("courseId") String courseId,
                                           @PathVariable("userId") String userId) {
         try {
             courseService.addUserToCourse(Integer.parseInt(courseId), Integer.parseInt(userId));
             return ResponseEntity.ok()
-                    .body("student added.");
+                    .body("user added.");
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.badRequest()
                     .body("error " + e.getMessage());
         }
@@ -113,7 +95,7 @@ public class CourseRestController {
     }
 
     @GetMapping(value = "/teachersToAdd/{courseId}", produces = "application/json")
-    public List<AcademicUser> getTeachersNotInCourse(@PathVariable("courseId") String courseId) {
+    public List<Teacher> getTeachersNotInCourse(@PathVariable("courseId") String courseId) {
         try {
             return courseService.getTeachersNotInCourse(Integer.parseInt(courseId));
         } catch (Exception e) {

@@ -3,16 +3,21 @@ package io.github.zahrarsl.exam.service;
 import io.github.zahrarsl.exam.model.dao.CourseDao;
 import io.github.zahrarsl.exam.model.entity.AcademicUser;
 import io.github.zahrarsl.exam.model.entity.Course;
+import io.github.zahrarsl.exam.model.entity.Student;
+import io.github.zahrarsl.exam.model.entity.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CourseService {
 
     private CourseDao courseDao;
     private AcademicUserService academicUserService;
+    private TeacherService teacherService;
+    private StudentService studentService;
 
     @Autowired
     public void setCourseDao(CourseDao courseDao) {
@@ -22,6 +27,16 @@ public class CourseService {
     @Autowired
     public void setAcademicUserService(AcademicUserService academicUserService) {
         this.academicUserService = academicUserService;
+    }
+
+    @Autowired
+    public void setTeacherService(TeacherService teacherService) {
+        this.teacherService = teacherService;
+    }
+
+    @Autowired
+    public void setStudentService(StudentService studentService) {
+        this.studentService = studentService;
     }
 
     public List<Course> getAll(){
@@ -36,24 +51,22 @@ public class CourseService {
         return courseDao.getById(id);
     }
 
-    public List<AcademicUser> getCourseTeachers(int id){
-        //todo handle error scenarios and throw exception
+    public List<Teacher> getCourseTeachers(int id){
         return courseDao.getCourseTeachers(id);
     }
 
-    public List<AcademicUser> getCourseStudents(int id){
-        //todo
+    public List<Student> getCourseStudents(int id){
         return courseDao.getCourseStudents(id);
     }
 
     public Course addTeacherToCourse(int courseId, int teacherId) throws Exception{
         Course course = getCourse(courseId);
-        AcademicUser user = academicUserService.getUser(teacherId);
-        if (course.getTeachers().contains(user)){
+        Teacher teacher = teacherService.getUser(teacherId);
+        if (course.getTeachers().contains(teacher)){
             throw new Exception("duplicate user");
         }
-        if (user.getRole().equals("TEACHER")) {
-            course.getTeachers().add(user);
+        if (teacher.getRole().equals("TEACHER")) {
+            course.getTeachers().add(teacher);
             return save(course);
         }
         else {
@@ -64,12 +77,12 @@ public class CourseService {
 
     public Course addStudentToCourse(int courseId, int studentId) throws Exception{
         Course course = getCourse(courseId);
-        AcademicUser user = academicUserService.getUser(studentId);
-        if (course.getStudents().contains(user)){
+        Student student = studentService.getUser(studentId);
+        if (course.getStudents().contains(student)){
             throw new Exception("duplicate user");
         }
-        if (user.getRole().equals("STUDENT")) {
-            course.getStudents().add(user);
+        if (student.getRole().equals("STUDENT")) {
+            course.getStudents().add(student);
             return save(course);
         }
         else {
@@ -79,26 +92,25 @@ public class CourseService {
 
     public Course addUserToCourse(int courseId, int userId) throws Exception{
         AcademicUser user = academicUserService.getUser(userId);
-        Course course = getCourse(courseId);
-        if (user.getRole().equals("STUDENT")){
-            return addStudentToCourse(courseId, userId);
-        }else if (user.getRole().equals("TEACHER")){
-            return addTeacherToCourse(courseId, userId);
-        }
-        else {
-            throw new Exception("user is invalid to add to course");
+        switch (user.getRole()) {
+            case "STUDENT":
+                return addStudentToCourse(courseId, userId);
+            case "TEACHER":
+                return addTeacherToCourse(courseId, userId);
+            default:
+                throw new Exception("user is invalid to add to course");
         }
     }
 
-    public List<AcademicUser> getTeachersNotInCourse(int courseId){
-        List<AcademicUser> teachers = academicUserService.getTeachers();
+    public List<Teacher> getTeachersNotInCourse(int courseId){
+        List<Teacher> teachers = academicUserService.getTeachers();
         Course course = courseDao.getById(courseId);
         teachers.removeAll(course.getTeachers());
         return teachers;
     }
 
     public List<AcademicUser> getStudentsNotInCourse(int courseId){
-        List<AcademicUser> students = academicUserService.getStudents();
+        List<AcademicUser> students = academicUserService.getVerifiedStudents();
         Course course = courseDao.getById(courseId);
         students.removeAll(course.getStudents());
         return students;

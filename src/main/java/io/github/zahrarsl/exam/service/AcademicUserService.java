@@ -2,7 +2,11 @@ package io.github.zahrarsl.exam.service;
 
 import io.github.zahrarsl.exam.model.dao.AcademicUserDao;
 import io.github.zahrarsl.exam.model.dao.AcademicUserSpecifications;
+import io.github.zahrarsl.exam.model.dao.StudentDao;
+import io.github.zahrarsl.exam.model.dao.TeacherDao;
 import io.github.zahrarsl.exam.model.entity.AcademicUser;
+import io.github.zahrarsl.exam.model.entity.Student;
+import io.github.zahrarsl.exam.model.entity.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +19,8 @@ import java.util.List;
 @Service
 public class AcademicUserService {
     private AcademicUserDao academicUserDao;
+    private StudentDao studentDao;
+    private TeacherDao teacherDao;
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -28,14 +34,28 @@ public class AcademicUserService {
         this.academicUserDao = academicUserDao;
     }
 
+    @Autowired
+    public void setStudentDao(StudentDao studentDao) {
+        this.studentDao = studentDao;
+    }
+
+    @Autowired
+    public void setTeacherDao(TeacherDao teacherDao) {
+        this.teacherDao = teacherDao;
+    }
+
     public AcademicUser save(AcademicUser user) throws Exception{
         try {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            return academicUserDao.save(user);
+            if (user.getRole().equals("STUDENT")) {
+                return studentDao.save(new Student(user));
+            }
+            else {
+                return teacherDao.save(new Teacher(user));
+            }
         } catch (Exception e) {
             throw new Exception("this user have signed up before.");
         }
-
     }
 
     public AcademicUser saveWithoutPasswordEncoding(AcademicUser user) {
@@ -90,12 +110,20 @@ public class AcademicUserService {
     }
 
 
-    public List<AcademicUser> getTeachers(){
-        return academicUserDao.findByRoleEquals("TEACHER");
+    public List<Teacher> getTeachers(){
+        return teacherDao.findAll();
     }
 
-    public List<AcademicUser> getStudents(){
-        return academicUserDao.findByRoleEquals("STUDENT");
+    public List<AcademicUser> getVerifiedTeacher(){
+        return academicUserDao.findByAdminVerificationStatusIsTrueAndRoleEquals("TEACHER");
+    }
+
+    public List<Student> getStudents(){
+        return studentDao.findAll();
+    }
+
+    public List<AcademicUser> getVerifiedStudents(){
+        return academicUserDao.findByAdminVerificationStatusIsTrueAndRoleEquals("STUDENT");
     }
 
     public String getState(int userId) throws Exception{
