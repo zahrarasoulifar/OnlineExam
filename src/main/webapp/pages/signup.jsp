@@ -5,7 +5,6 @@
 <html>
 <head>
     <link href="<c:url value="/resources/css/signup.css"/>" rel="stylesheet">
-    <script src="<c:url value="/resources/js/hello.js" />"></script>
     <title>register</title>
 </head>
 <body>

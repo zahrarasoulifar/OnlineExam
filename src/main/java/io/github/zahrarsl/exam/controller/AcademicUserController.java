@@ -71,11 +71,11 @@ public class AcademicUserController {
                 return "email_sent";
             } catch (Exception e) {
                 model.addAttribute("message", "invalid email address. cannot send email.");
-                return "error1";
+                return "error";
             }
         } catch (Exception e) {
             model.addAttribute("message", e.getMessage());
-            return "error1";
+            return "error";
         }
 
     }

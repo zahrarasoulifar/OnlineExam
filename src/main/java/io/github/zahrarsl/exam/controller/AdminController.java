@@ -44,7 +44,7 @@ public class AdminController {
             return new ModelAndView("admin_user", "user", user);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ModelAndView("error1", "message",
+            return new ModelAndView("error", "message",
                     "error happened while processing your request ");
         }
 
