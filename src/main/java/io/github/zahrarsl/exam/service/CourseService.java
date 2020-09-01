@@ -1,10 +1,7 @@
 package io.github.zahrarsl.exam.service;
 
 import io.github.zahrarsl.exam.model.dao.CourseDao;
-import io.github.zahrarsl.exam.model.entity.AcademicUser;
-import io.github.zahrarsl.exam.model.entity.Course;
-import io.github.zahrarsl.exam.model.entity.Student;
-import io.github.zahrarsl.exam.model.entity.Teacher;
+import io.github.zahrarsl.exam.model.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -132,5 +129,23 @@ public class CourseService {
         } else {
             throw new Exception("course not found");
         }
+    }
+
+    public List<Course> getCoursesByTeacher(int teacherId){
+        try {
+            Teacher teacher = teacherService.getUser(teacherId);
+            List<Course> courses = courseDao.getByTeacher(teacher);
+            System.out.println("akjdlkaj-----------------------------------------");
+            System.out.println(courses);
+            return courses;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Exam> getCourseExams(int courseId){
+        List<Exam> exams = courseDao.getById(courseId).getExams();
+        return exams;
     }
 }

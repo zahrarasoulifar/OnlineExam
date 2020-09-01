@@ -14,7 +14,7 @@
 </div>
 <div class="form_container">
     <div id="message" align="center">${message}</div>
-<form:form modelAttribute="course" action="/course/" method="post">
+    <form:form modelAttribute="course" action="/course/" method="post">
     <form:input path="title" name="title" required="required" placeholder="course title"/>
     <form:input path="number" name="number" required="required" placeholder="course number"/>
     <form:input path="category" name="category" required="required" placeholder="category"/>
@@ -45,8 +45,6 @@
         };
         xhttp.open("GET", "http://localhost:8080/course/getCourses", true);
         xhttp.send();
-
-
     }
 
     function showData(data){

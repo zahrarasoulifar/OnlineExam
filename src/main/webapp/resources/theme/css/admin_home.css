@@ -1,7 +1,4 @@
-ul li.checked {
-    background: #888;
-    color: #fff;
-}
+
 
 ul li {
     list-style-type: none;
@@ -57,7 +54,6 @@ button {
     margin-left: 2px;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-
 }
 
 #message{

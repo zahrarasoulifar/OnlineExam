@@ -54,6 +54,7 @@ public class AcademicUserService {
                 return teacherDao.save(new Teacher(user));
             }
         } catch (Exception e) {
+            e.printStackTrace();
             throw new Exception("this user have signed up before.");
         }
     }

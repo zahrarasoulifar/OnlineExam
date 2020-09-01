@@ -1,9 +1,12 @@
 package io.github.zahrarsl.exam.service;
 
 import io.github.zahrarsl.exam.model.dao.TeacherDao;
+import io.github.zahrarsl.exam.model.entity.Exam;
 import io.github.zahrarsl.exam.model.entity.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TeacherService {
@@ -21,4 +24,5 @@ public class TeacherService {
             throw new Exception("finding teacher failed");
         }
     }
+
 }

@@ -1,9 +1,6 @@
 package io.github.zahrarsl.exam.controller;
 
-import io.github.zahrarsl.exam.model.entity.AcademicUser;
-import io.github.zahrarsl.exam.model.entity.Course;
-import io.github.zahrarsl.exam.model.entity.Student;
-import io.github.zahrarsl.exam.model.entity.Teacher;
+import io.github.zahrarsl.exam.model.entity.*;
 import io.github.zahrarsl.exam.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/course")
-@PreAuthorize("hasAuthority('ADMIN')")
+@PreAuthorize("hasAnyAuthority('ADMIN, TEACHER')")
 public class CourseRestController {
 
     private CourseService courseService;
@@ -29,16 +26,25 @@ public class CourseRestController {
         return courseService.getAll();
     }
 
-    @PostMapping(value = "/add", consumes = "application/json")
-    public ResponseEntity saveNewCourse(@RequestBody Course course) {
-        try {
-            courseService.save(course);
-            return ResponseEntity.ok()
-                    .body("course saved with title:" + course.getTitle());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                    .body("error " + e.getMessage());
-        }
+//    @PostMapping(value = "/add", consumes = "application/json")
+//    public ResponseEntity saveNewCourse(@RequestBody Course course) {
+//        try {
+//            courseService.save(course);
+////            System.out.println(course.getTitle());
+//            return ResponseEntity.ok()
+//                    .body("course saved with title:" + course.getTitle());
+//        } catch (Exception e) {
+//            return ResponseEntity.badRequest()
+//                    .body("error " + e.getMessage());
+//        }
+//    }
+
+    @GetMapping(value = "/exams/{courseId}")
+    public List<Exam> getExams(@PathVariable String courseId){
+        List<Exam> courseExams = courseService.getCourseExams(Integer.parseInt(courseId));
+        System.out.println("____________________________________________-------abcd");
+        System.out.println(courseExams);
+        return courseExams;
     }
 
 

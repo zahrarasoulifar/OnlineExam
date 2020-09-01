@@ -21,4 +21,7 @@ public interface CourseDao extends Repository<Course, Integer> {
 
     @Query("select students from Course c where c.id=:id")
     List<Student> getCourseStudents(@Param("id") int id);
+
+    @Query("SELECT c FROM Course AS c WHERE :teacher MEMBER OF c.teachers")
+    List<Course> getByTeacher(@Param("teacher") Teacher teacher);
 }

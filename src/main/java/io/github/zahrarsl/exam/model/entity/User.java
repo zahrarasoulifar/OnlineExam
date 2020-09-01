@@ -1,5 +1,7 @@
 package io.github.zahrarsl.exam.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity

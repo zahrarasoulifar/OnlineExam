@@ -41,6 +41,7 @@ public class AcademicUserRestController {
             academicUserService.save(academicUser);
             result = "user added successfully.";
         } catch (Exception e) {
+            e.printStackTrace();
             result = "error: " + e.getMessage();
         }
         return result;

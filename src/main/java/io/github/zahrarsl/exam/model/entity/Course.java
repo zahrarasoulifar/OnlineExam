@@ -1,5 +1,7 @@
 package io.github.zahrarsl.exam.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,10 +15,22 @@ public class Course {
     @Column(unique = true)
     private String number;
     private String category;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Teacher> teachers;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Student> students;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
+    @JsonIgnore
+    private List<Exam> exams;
+
+    public Course(String title, String number, String category) {
+        this.title = title;
+        this.number = number;
+        this.category = category;
+    }
+
+    public Course() {
+    }
 
     public int getId() {
         return id;
@@ -66,6 +80,14 @@ public class Course {
         this.category = category;
     }
 
+    public List<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<Exam> exams) {
+        this.exams = exams;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
@@ -73,8 +95,6 @@ public class Course {
                 ", title='" + title + '\'' +
                 ", number='" + number + '\'' +
                 ", category='" + category + '\'' +
-                ", teachers=" + teachers +
-                ", students=" + students +
                 '}';
     }
 }
