@@ -47,8 +47,11 @@
         var table = '<tr> <th>Title</th> <th>Time</th> <th>Start</th> <th>End</th><th> </th></tr>';
         data.map(value =>
         table += '<tr id="' + value.id + '"><td> ' + value.title +
-            '</td><td>' + value.time + '</td><td>' + value.startDate +
-            '</td><td>' + value.endDate +
+            '</td><td>' + value.time + '</td><td>'
+            + new Date(value.startDate).toLocaleDateString() + ' '
+            + new Date(value.startDate).toLocaleTimeString() + '</td><td>'
+            + new Date(value.endDate).toLocaleDateString() + ' '
+            + new Date(value.endDate).toLocaleTimeString() +
             '</td><td class="clickable" style="font-weight: bold;" ' +
             'onclick="openExam(' + value.id + ',' + ${user.id} + ',' + value.teacher.id + ')">open </td></tr>'
     )
