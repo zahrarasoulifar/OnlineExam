@@ -1,4 +1,7 @@
-
+ul li.checked {
+    background: #888;
+    color: #fff;
+}
 
 ul li {
     list-style-type: none;

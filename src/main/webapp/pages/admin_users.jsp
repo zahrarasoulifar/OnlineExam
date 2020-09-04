@@ -43,7 +43,7 @@
 
             }
         };
-        xhttp.open("GET", "http://localhost:8080/admin/getVerifiedUsers", true);
+        xhttp.open("GET", "http://localhost:8080/user/getVerifiedUsers", true);
         xhttp.send();
     }
 

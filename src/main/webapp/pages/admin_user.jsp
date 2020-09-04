@@ -60,7 +60,7 @@
                     window.open("/admin/users", "_self");
                 }
             };
-            xhttp.open("DELETE", "http://localhost:8080/admin/delete/" + userId, true);
+            xhttp.open("DELETE", "http://localhost:8080/user/delete/" + userId, true);
             xhttp.send();
         }
     }

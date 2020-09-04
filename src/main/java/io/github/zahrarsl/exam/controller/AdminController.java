@@ -99,7 +99,6 @@ public class AdminController {
             e.printStackTrace();
             return new ModelAndView("admin_users");
         }
-
     }
 
     @RequestMapping(value = "/home")

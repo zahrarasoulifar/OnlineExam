@@ -13,17 +13,11 @@ import java.util.List;
 @Service
 public class AdminService {
     private AdminDao adminDao;
-    private AcademicUserDao academicUserDao;
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     public void setAdminDao(AdminDao adminDao) {
         this.adminDao = adminDao;
-    }
-
-    @Autowired
-    public void setAcademicUserDao(AcademicUserDao academicUserDao) {
-        this.academicUserDao = academicUserDao;
     }
 
     @Autowired
@@ -36,21 +30,4 @@ public class AdminService {
         return adminDao.save(admin);
     }
 
-    public List<AcademicUser> getUnverifiedUsers(){
-       return academicUserDao.findByAdminVerificationStatusIsFalseAndEmailVerificationStatusIsTrue();
-    }
-
-    public boolean verifyUser(int userId){
-        try{
-            academicUserDao.setAdminVerificationStatusTrue(userId);
-            return true;
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public List<AcademicUser> getVerifiedUsers(){
-        return academicUserDao.findByAdminVerificationStatusIsTrue();
-    }
 }

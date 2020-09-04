@@ -38,7 +38,7 @@
                 showData(data);
             }
         };
-        xhttp.open("GET", "http://localhost:8080/admin/getUnverifiedUsers", true);
+        xhttp.open("GET", "http://localhost:8080/user/getUnverifiedUsers", true);
         xhttp.send();
     }
 
@@ -73,7 +73,7 @@
                 }
             }
         };
-        xhttp.open("GET", "http://localhost:8080/admin/verify?userId=" + userId, true);
+        xhttp.open("GET", "http://localhost:8080/user/verify?userId=" + userId, true);
         xhttp.send();
     }
 
