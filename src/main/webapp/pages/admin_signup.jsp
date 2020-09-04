@@ -73,7 +73,6 @@
         $.ajax({
             type : "POST",
             contentType : 'application/json; charset=utf-8',
-            // dataType : 'json',
             url : signupUrl,
             data : JSON.stringify(user),
             success : function(result) {

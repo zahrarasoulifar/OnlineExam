@@ -6,6 +6,7 @@
 <head>
     <title>courses</title>
     <link href="<c:url value="/resources/css/admin_courses.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/tables.css"/>" rel="stylesheet">
 </head>
 <body>
 <div align="right">
@@ -26,6 +27,10 @@
 
 
 <div class="main" id="action_message">click on each course to open course page!</div>
+<table id="table">
+
+</table>
+
 <ul id="list">
 
 </ul>
@@ -47,13 +52,14 @@
         xhttp.send();
     }
 
-    function showData(data){
-        var list = '';
+    function showData(data) {
+        var table = '<tr> <th>course title</th> <th>category</th> <th>number</th></tr>';
         data.map(value =>
-        list += '<li id=' + value.id + '> ' + value.title +
-            '<br> ' + value.number + ' <br>' + value.category + '</li>'
-    );
-        document.getElementById("list").innerHTML =list;
+        table += '<tr id="' + value.id + '"><td> ' + value.title + '</td><td>'
+            + value.category + '</td><td>' + value.number + '</td></tr>'
+    )
+        document.getElementById("table").innerHTML =table;
+        addRowHandlers();
     }
 
     var list = document.querySelector('ul');
@@ -62,6 +68,22 @@
             window.open("/course/getCoursePage/" + ev.target.id, "_self");
         }
     }, false);
+
+
+    function addRowHandlers() {
+        var table = document.getElementById("table");
+        var rows = table.getElementsByTagName("tr");
+        for (i = 1; i < rows.length; i++) {
+            var currentRow = table.rows[i];
+            var createClickHandler = function(row) {
+                return function() {
+                    window.open("/course/getCoursePage/" + row.id, "_self");
+
+                };
+            };
+            currentRow.onclick = createClickHandler(currentRow);
+        }
+    }
 </script>
 
 </html>

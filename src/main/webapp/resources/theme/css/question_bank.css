@@ -42,18 +42,3 @@ button {
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
 
-.main {
-    color: #000;
-    background-color: #FFFFFF;
-    width: fit-content;
-    height: fit-content;
-    padding: 10px 40px;
-    margin-top: -1px;
-    border-radius: 1.5em;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.14);
-    display: inline-block;
-}
-
-.navbar {
-    margin-top: 10px;
-}

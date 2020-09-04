@@ -18,13 +18,7 @@ import java.util.List;
 @RequestMapping(value = "/teacher")
 @PreAuthorize("hasAuthority('TEACHER')")
 public class TeacherRestController {
-    private TeacherService teacherService;
     private CourseService courseService;
-
-    @Autowired
-    public void setTeacherService(TeacherService teacherService) {
-        this.teacherService = teacherService;
-    }
 
     @Autowired
     public void setCourseService(CourseService courseService) {
@@ -35,9 +29,4 @@ public class TeacherRestController {
     public List<Course> getTeacherCourses(@PathVariable("teacherId") String teacherId){
         return courseService.getCoursesByTeacher(Integer.parseInt(teacherId));
     }
-
-//    @GetMapping(value = "/teacher_exams/{teacherId}")
-//    public List<Exam> getTeacherExams(){
-//        return teacherService.
-//    }
 }

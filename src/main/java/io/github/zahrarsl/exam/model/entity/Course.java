@@ -15,13 +15,21 @@ public class Course {
     @Column(unique = true)
     private String number;
     private String category;
+
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Teacher> teachers;
+
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Student> students;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
     @JsonIgnore
     private List<Exam> exams;
+
+    @OneToMany
+    @Column(name = "question_id")
+    @JsonIgnore
+    private List<Question> questionBank;
 
     public Course(String title, String number, String category) {
         this.title = title;
@@ -86,6 +94,14 @@ public class Course {
 
     public void setExams(List<Exam> exams) {
         this.exams = exams;
+    }
+
+    public List<Question> getQuestionBank() {
+        return questionBank;
+    }
+
+    public void setQuestionBank(List<Question> questionBank) {
+        this.questionBank = questionBank;
     }
 
     @Override

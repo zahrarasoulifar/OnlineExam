@@ -26,24 +26,9 @@ public class CourseRestController {
         return courseService.getAll();
     }
 
-//    @PostMapping(value = "/add", consumes = "application/json")
-//    public ResponseEntity saveNewCourse(@RequestBody Course course) {
-//        try {
-//            courseService.save(course);
-////            System.out.println(course.getTitle());
-//            return ResponseEntity.ok()
-//                    .body("course saved with title:" + course.getTitle());
-//        } catch (Exception e) {
-//            return ResponseEntity.badRequest()
-//                    .body("error " + e.getMessage());
-//        }
-//    }
-
     @GetMapping(value = "/exams/{courseId}")
     public List<Exam> getExams(@PathVariable String courseId){
         List<Exam> courseExams = courseService.getCourseExams(Integer.parseInt(courseId));
-        System.out.println("____________________________________________-------abcd");
-        System.out.println(courseExams);
         return courseExams;
     }
 

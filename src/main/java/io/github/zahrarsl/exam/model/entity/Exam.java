@@ -1,5 +1,6 @@
 package io.github.zahrarsl.exam.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -28,7 +29,8 @@ public class Exam {
     @ElementCollection
     @MapKeyJoinColumn(name = "question_id")
     @Column(name = "question_point")
-    private Map<Question, Integer> questions;
+    @JsonIgnore
+    private Map<Question, Double> questions;
 
     public Exam(String title, String description, int time, Date startDate, Date endDate) {
         this.title = title;
@@ -105,11 +107,11 @@ public class Exam {
         this.teacher = teacher;
     }
 
-    public Map<Question, Integer> getQuestions() {
+    public Map<Question, Double> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(Map<Question, Integer> questions) {
+    public void setQuestions(Map<Question, Double> questions) {
         this.questions = questions;
     }
 

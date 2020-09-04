@@ -5,6 +5,7 @@
 <head>
 
     <link href="<c:url value="/resources/css/admin_course.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/tables.css"/>" rel="stylesheet">
     <title>course</title>
 
 </head>
@@ -20,12 +21,14 @@
 <p class="main" id="list_action_message">click on each user to delete from course!</p>
 <div>
     <h3>teachers</h3>
-    <ul id="teachers">
-    </ul>
+    <table id="teachers">
+
+    </table>
 
     <h3>students</h3>
-    <ul id="students">
-    </ul>
+    <table id="students">
+
+    </table>
 
 </div>
 
@@ -36,7 +39,6 @@
     window.onload = function (ev) {
         loadStudents();
         loadTeachers();
-        deleteOperation();
     }
 
     function loadTeachers() {
@@ -45,6 +47,7 @@
             if (this.readyState == 4 && this.status == 200) {
                 var data = JSON.parse(this.responseText);
                 showData(data, "teachers");
+                deleteOperation();
             }
         };
         xhttp.open("GET", "http://localhost:8080/course/getCourseTeachers/" + ${course.id}, true);
@@ -64,21 +67,18 @@
         xhttp.send();
     }
 
-    function showData(data, listName){
-        var list = '';
+    function showData(data, tableId) {
+        var table = '<tr> <th>first name</th> <th>last name</th> <th>role</th></tr>';
         data.map(value =>
-        list += '<li id=' + value.id + '> ' + value.firstName +
-            '<br>' + value.lastName + '<br>' + value.role + '</li>'
-    );
-
-        document.getElementById(listName).innerHTML =list;
+        table += '<tr id="' + value.id + '"><td> ' + value.firstName + '</td><td>'
+            + value.lastName + '</td><td>' + value.role + '</td></tr>'
+    )
+        document.getElementById(tableId).innerHTML =table;
     }
-
 
     function loadAddingData() {
         loadTeachersToAdd();
         loadStudentsToAdd();
-        addOperation();
         isDeletable = false;
         document.getElementById("list_action_message").innerHTML = "click on each user to add to the course";
     }
@@ -88,6 +88,7 @@
             if (this.readyState == 4 && this.status == 200) {
                 var data = JSON.parse(this.responseText);
                 showData(data, "teachers");
+                addOperation();
             }
         };
         xhttp.open("GET", "http://localhost:8080/course/teachersToAdd/" + ${course.id}, true);
@@ -100,6 +101,7 @@
             if (this.readyState == 4 && this.status == 200) {
                 var data = JSON.parse(this.responseText);
                 showData(data, "students");
+                addOperation();
             }
         };
         xhttp.open("GET", "http://localhost:8080/course/studentsToAdd/" + ${course.id}, true);
@@ -108,17 +110,21 @@
 
 
     function addOperation() {
-        var list = document.querySelectorAll('ul');
-        for (i = 0; i < list.length; i++) {
-            list[i] = list[i].cloneNode(true);
-            list[i].addEventListener('click', function addEvent(ev) {
-                if (ev.target.tagName === 'LI') {
-                    ev.target = ev.target.cloneNode(true);
-                    ev.target.classList.add('checked');
-                    addUserToCourse(ev.target.id);
-                }
-
-            }, false);
+        var tables = document.getElementsByTagName("table");
+        for (i = 0; i < tables.length; i++) {
+            var rows = tables[i].getElementsByTagName("tr");
+            for (j = 1; j < rows.length; j++) {
+                var currentRow = tables[i].rows[j];
+                var createClickHandler = function (row) {
+                    return function () {
+                        row = row.cloneNode(true);
+                        addUserToCourse(row.id);
+                        document.getElementById(row.id).style.backgroundColor = "#888";
+                        document.getElementById(row.id).classList.add('checked');
+                    };
+                };
+                currentRow.onclick = createClickHandler(currentRow);
+            }
         }
     }
 
@@ -134,23 +140,27 @@
     }
 
     function deleteOperation() {
-        var list = document.querySelectorAll('ul');
-        for (i = 0; i < list.length; i++) {
-            list[i].addEventListener('click', function deleteEvent(ev) {
-                if (ev.target.tagName === 'LI') {
-                    if (!ev.target.classList.contains('checked')) {
-                        if (isDeletable === true) {
-                            var deleteConfirm = confirm("are you sure you want to delete this user from course?");
-                            if (deleteConfirm === true) {
-                                ev.target.classList.add('checked');
-                                deleteUserFromCourse(ev.target.id);
+        var tables = document.getElementsByTagName("table");
+        for (i = 0; i < tables.length; i++) {
+            var rows = tables[i].getElementsByTagName("tr");
+            for (j = 1; j < rows.length; j++) {
+                var currentRow = tables[i].rows[j];
+                var createClickHandler = function (row) {
+                    return function () {
+                        if (!row.classList.contains('checked')) {
+                            if (isDeletable === true) {
+                                var deleteConfirm = confirm("are you sure you want to delete this user from course?");
+                                if (deleteConfirm === true) {
+                                    row.classList.add('checked');
+                                    deleteUserFromCourse(row.id);
+                                }
                             }
                         }
-                    }
-                }
 
-            }, false);
-
+                    };
+                };
+                currentRow.onclick = createClickHandler(currentRow);
+            }
         }
     }
 
@@ -159,6 +169,7 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(this.responseText);
+                window.open("/course/getCoursePage/" + ${course.id}, "_self");
             }
         };
         xhttp.open("DELETE", "http://localhost:8080/course/deleteUser/" + ${course.id} + "/" + userId, true);

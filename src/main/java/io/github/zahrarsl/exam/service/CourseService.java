@@ -5,6 +5,7 @@ import io.github.zahrarsl.exam.model.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -135,8 +136,6 @@ public class CourseService {
         try {
             Teacher teacher = teacherService.getUser(teacherId);
             List<Course> courses = courseDao.getByTeacher(teacher);
-            System.out.println("akjdlkaj-----------------------------------------");
-            System.out.println(courses);
             return courses;
         } catch (Exception e) {
             e.printStackTrace();
@@ -148,4 +147,13 @@ public class CourseService {
         List<Exam> exams = courseDao.getById(courseId).getExams();
         return exams;
     }
+
+    public List<Question> getQuestionBankByCategory(String category){
+        List<Course> courses = courseDao.getByCategory(category);
+        List<Question> questions = new ArrayList<>();
+        courses.forEach(course -> questions.addAll(course.getQuestionBank()));
+        return questions;
+    }
+
+
 }

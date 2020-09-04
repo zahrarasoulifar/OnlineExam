@@ -13,6 +13,7 @@ import java.util.List;
 public interface CourseDao extends Repository<Course, Integer> {
     Course save(Course course);
     Course getById(int id);
+    List<Course> getByCategory(String category);
     void deleteById(int id);
 
     List<Course> findAll();

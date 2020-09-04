@@ -1,0 +1,21 @@
+ul li {
+    list-style-type: none;
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    background: #ffffff;
+    font-size: 18px;
+    transition: 0.2s;
+    line-height: 5vh;
+}
+
+li {
+    border-bottom: 1px solid #ccc;
+    border-radius: 10px
+}
+
+
+
+li:last-child {
+    border: none;
+}

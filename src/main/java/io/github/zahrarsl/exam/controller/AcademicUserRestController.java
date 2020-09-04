@@ -34,8 +34,6 @@ public class AcademicUserRestController {
     @PostMapping(value = "/addByAdmin", consumes = "application/json", produces = "text/html")
     public String addByAdmin(@RequestBody AcademicUser academicUser) {
         academicUser.setAdminVerificationStatus(true);
-        System.out.println(academicUser);
-        System.out.println(academicUser.hasAdminVerified());
         String result;
         try {
             academicUserService.save(academicUser);

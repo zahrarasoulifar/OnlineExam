@@ -1,16 +1,12 @@
 package io.github.zahrarsl.exam.controller;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.github.zahrarsl.exam.model.entity.AcademicUser;
-import io.github.zahrarsl.exam.model.entity.Course;
-import io.github.zahrarsl.exam.model.entity.Exam;
+import io.github.zahrarsl.exam.model.entity.Question;
 import io.github.zahrarsl.exam.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/exam")
@@ -34,6 +30,11 @@ public class ExamRestController {
         }
     }
 
+    @GetMapping(value = "/questions/{examId}")
+    public Map<Question, Double> getExamQuestions(@PathVariable("examId") int examId) {
+        return examService.get(examId).getQuestions();
+    }
+
     @PutMapping(value = "/stop/{examId}")
     public String stopExam(@PathVariable("examId") String examId) {
         try {
@@ -43,5 +44,10 @@ public class ExamRestController {
             e.printStackTrace();
             return "stopping exam failed!";
         }
+    }
+
+    @GetMapping(value = "/total_point/{examId}")
+    public double getExamTotalPoint(@PathVariable("examId") int examId) {
+        return examService.getExamTotalPoint(examId);
     }
 }

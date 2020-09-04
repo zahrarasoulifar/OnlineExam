@@ -4,16 +4,16 @@
 <head>
     <title>Course</title>
     <link href="<c:url value="/resources/css/teacher_course.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/messages.css"/>" rel="stylesheet">
 </head>
 <body>
-<div class="main">
-    <p>${course.title}</p>
-</div>
 <div class="navbar" >
+    <p class="message">${course.title}</p>
     <button onclick="location.href='/teacher/home_page/${user.id}';">back</button>
     <button onclick="location.href='/teacher/add_exam_page/' + ${user.id} + '/' + ${course.id};">add exam</button>
 </div>
 <div>
+    <h3>Exams!</h3>
     <table id="table">
         <tr>
             <th>Title</th>
@@ -37,7 +37,6 @@
             if (this.readyState == 4 && this.status == 200) {
                 var data = JSON.parse(this.responseText);
                 showData(data);
-                // addRowHandlers();
             }
         };
         xhttp.open("GET", "http://localhost:8080/course/exams/" + ${course.id}, true);

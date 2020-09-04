@@ -4,15 +4,23 @@
 <head>
     <title>Edit Exam!</title>
     <link href="<c:url value="/resources/css/teacher_exam.css"/>" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="navbar" >
     <button onclick="location.href='/teacher/course/${exam.teacher.id}/${exam.course.id}';">back</button>
     <button onclick="deleteExam(${exam.id}, ${exam.teacher.id}, ${exam.course.id})">delete</button>
-    <button onclick="location.href='#';">add Question</button>
+    <div class="dropdown">
+        <button class="dropbtn">Add Question<br>
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="/question/choose_question_type/${exam.id}/${exam.course.id}">New Question</a>
+            <a href="/question/question_bank_page/${exam.id}/${exam.course.id}">Question Bank</a>
+        </div>
+    </div>
     <button onclick="stopExam(${exam.id})">stop exam!</button>
 </div><br><br>
-
 <div>
     <p>${edit_message}</p>
     <form method="post" action="/exam/edit/${exam.id}">
@@ -34,6 +42,11 @@
         </tr>
     </table>
     </form>
+
+    <h3>Questions! Total points: <span id="total_point"></span></h3>
+    <table id="question_table">
+
+    </table>
 </div>
 </body>
 <script>
@@ -72,6 +85,71 @@
             xhttp.open("PUT", "http://localhost:8080/exam/stop/" + examId, true);
             xhttp.send();
         }
+    }
+
+    window.onload = function () {
+        getQuestions();
+        getExamTotalPoint("${exam.id}");
+    }
+
+    function getExamTotalPoint(examId) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("total_point").textContent = this.responseText;
+            }
+        };
+        xhttp.open("GET", "http://localhost:8080/exam/total_point/" + examId, true);
+        xhttp.send();
+    }
+    function getQuestions() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+                var data = JSON.parse(this.responseText);
+                console.log(data);
+                showMapData(data);
+            }
+        };
+        xhttp.open("GET", "http://localhost:8080/exam/questions/${exam.id}", true);
+        xhttp.send();
+    }
+
+    function showMapData(data) {
+        var questionTable = '<tr > <th>Title</th> <th>Question</th> <th>Point </th><th></th></tr>';
+        for (var index in data) {
+            console.log("question : " + index + ", " + data[index]);
+            var question = JSON.parse(index);
+            questionTable += '<tr id="' + question.id + '"><td contenteditable="true"> ' + question.title +
+                '</td><td contenteditable="true">' + question.content + '</td> <td>' + data[index] + '</td>' +
+                ' <td style="font-weight: bold; cursor: pointer" ' +
+                'onclick="editQuestion(' + question.id + ')">save changes</td>';
+        }
+        document.getElementById("question_table").innerHTML = questionTable;
+    }
+
+    function editQuestion(questionId) {
+        var row = document.getElementById(questionId);
+        var cells = row.getElementsByTagName("td");
+        var question = {
+            "id" : questionId,
+            "title" : cells[0].textContent,
+            "content" : cells[1].textContent
+        }
+        console.log(question);
+        $.ajax({
+            type : "PUT",
+            contentType : 'application/json; charset=utf-8',
+            url : "http://localhost:8080/question/edit",
+            data : JSON.stringify(question),
+            success : function(result) {
+                alert(result);
+            },
+            done : function(e) {
+                console.log("DONE");
+            }
+        });
     }
 
 

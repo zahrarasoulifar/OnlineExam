@@ -13,7 +13,6 @@
     <button onclick="location.href='/logout';">logout</button>
     <button onclick="location.href='/teacher/home';">reload</button>
     <button onclick="location.href='/teacher/profile/' + ${user.id};">profile</button>
-    <%--<button onclick="hello(${user_state})">courses</button>--%>
 </div>
 <h3 align="center">${user_state}</h3>
 <div>
@@ -70,7 +69,6 @@
             var currentRow = table.rows[i];
             var createClickHandler = function(row) {
                 return function() {
-                    // alert("id + " + row.id);
                     window.open("/teacher/course/" + ${user.id} + '/' + row.id, "_self");
                 };
             };

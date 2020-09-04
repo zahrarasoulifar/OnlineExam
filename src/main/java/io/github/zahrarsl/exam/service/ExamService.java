@@ -2,13 +2,13 @@ package io.github.zahrarsl.exam.service;
 
 import io.github.zahrarsl.exam.model.dao.ExamDao;
 import io.github.zahrarsl.exam.model.entity.Exam;
+import io.github.zahrarsl.exam.model.entity.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.Date;
+import java.util.Map;
 
 @Service
 public class ExamService {
@@ -70,5 +70,17 @@ public class ExamService {
         Exam exam = examDao.getById(examId);
         exam.setStopped(true);
         examDao.save(exam);
+    }
+
+    public void addQuestion(Question question, int examId, double point) {
+        Exam exam = get(examId);
+        Map<Question, Double> questions = exam.getQuestions();
+        questions.put(question, point);
+        examDao.save(exam);
+    }
+
+    public double getExamTotalPoint(int examId) {
+        Exam exam = examDao.getById(examId);
+        return exam.getQuestions().values().stream().reduce(0.0, Double::sum);
     }
 }

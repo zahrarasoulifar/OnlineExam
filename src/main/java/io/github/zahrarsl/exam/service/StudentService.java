@@ -9,16 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudentService {
     private StudentDao studentDao;
-    private AcademicUserDao academicUserDao;
 
     @Autowired
     public void setStudentDao(StudentDao studentDao) {
         this.studentDao = studentDao;
-    }
-
-    @Autowired
-    public void setAcademicUserDao(AcademicUserDao academicUserDao) {
-        this.academicUserDao = academicUserDao;
     }
 
     public Student getUser(int id) throws Exception {
