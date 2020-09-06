@@ -5,6 +5,7 @@
 <head>
     <title>admin</title>
     <link href="<c:url value="/resources/css/admin_home.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/tables.css"/>" rel="stylesheet">
 
 </head>
 <body>
@@ -18,11 +19,10 @@
 
 </div>
 <br>
-<p class="main" id="message">unverified users! click on each user to verify!</p>
-<p  id="verify_message"></p>
-<ul id="list">
 
-</ul>
+<table id="table">
+
+</table>
 
 
 </body>
@@ -35,42 +35,39 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var data = JSON.parse(this.responseText);
-                showData(data);
+                // showData(data);
+                showDataT(data);
             }
         };
         xhttp.open("GET", "http://localhost:8080/user/getUnverifiedUsers", true);
         xhttp.send();
     }
 
-    function showData(data){
-        var list = '';
+    function showDataT(data) {
+        var table = '<tr> <th>Name</th> <th>role</th> <th>email</th> <th> </th></tr>';
         data.map(value =>
-        list += '<li id=' + value.id + '> ' + value.firstName +
-            '   ' + value.lastName + '  |  ' + value.email + ' </li>'
-    );
-
-        document.getElementById("list").innerHTML =list;
+        table += '<tr id="' + value.id + '"><td> ' + value.firstName + ' ' + value.lastName +
+            '</td><td>' + value.role + '</td><td>' + value.email + '</td><td class="clickable" style="font-weight: bold;" ' +
+            'onclick="verify(' + value.id + ')">verify </td></tr>'
+    )
+        document.getElementById("table").innerHTML = table;
     }
 
-    var list = document.querySelector('ul');
-    list.addEventListener('click', function(ev) {
-        if (ev.target.tagName === 'LI') {
-            ev.target.classList.add('checked');
-            verify(ev.target.id);
+    function changeVerifyIcon(id) {
+        var row = document.getElementById(id);
+        console.log(row);
+        var cells = row.getElementsByTagName("td");
+        console.log(cells);
+        console.log(cells[3]);
+        cells[3].textContent = "✔";
+    }
 
-        }
-    }, false);
 
     function verify(userId) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText == true) {
-                    document.getElementById('verify_message').innerHTML = "user verified."
-                }
-                if (this.responseText == false) {
-                    document.getElementById('verify_message').innerHTML = "user verification failed."
-                }
+                changeVerifyIcon(userId);
             }
         };
         xhttp.open("GET", "http://localhost:8080/user/verify?userId=" + userId, true);
