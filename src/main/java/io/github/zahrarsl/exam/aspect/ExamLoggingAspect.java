@@ -21,7 +21,7 @@ public class ExamLoggingAspect {
         logger.info("exam with title = " + exam.getTitle() + " saved or updated. teacher id: " + exam.getTeacher().getId());
     }
 
-    @Pointcut("execution(* io.github.zahrarsl.exam.model.dao.CourseDao.save(..))")
+    @Pointcut("execution(* io.github.zahrarsl.exam.model.dao.ExamDao.save(..))")
     public void examSave(){}
 
 }
