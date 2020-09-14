@@ -28,4 +28,5 @@ public class MultipleChoiceQuestion extends Question {
     public void setRightAnswer(Answer rightAnswer) {
         this.rightAnswer = rightAnswer;
     }
+
 }

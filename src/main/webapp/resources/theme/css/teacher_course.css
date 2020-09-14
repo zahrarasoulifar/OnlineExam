@@ -1,6 +1,7 @@
 body {
     background-color: #F3EBF6;
     font-family: 'Ubuntu', sans-serif;
+    /*font-family: "Comic Sans MS", cursive, sans-serif;*/
 }
 
 button {
@@ -20,24 +21,24 @@ button {
 .clickable {
     cursor:pointer;
 }
-table {
-    overflow: hidden;
-    border-collapse: collapse;
-    width: 100%;
-    border-radius: 0.8em;
-    line-height: 3em;
-}
+/*table {*/
+    /*overflow: hidden;*/
+    /*border-collapse: collapse;*/
+    /*width: 100%;*/
+    /*border-radius: 0.8em;*/
+    /*line-height: 3em;*/
+/*}*/
 
-th, td {
-    text-align: left;
-    padding: 8px;
-}
+/*th, td {*/
+    /*text-align: left;*/
+    /*padding: 8px;*/
+/*}*/
 
-tr:nth-child(even){
-    background-color: #dfdbdf;
-}
+/*tr:nth-child(even){*/
+    /*background-color: #dfdbdf;*/
+/*}*/
 
-th {
-    background-color : #E040FB;
-    color: white;
-}
+/*th {*/
+    /*background-color : #E040FB;*/
+    /*color: white;*/
+/*}*/

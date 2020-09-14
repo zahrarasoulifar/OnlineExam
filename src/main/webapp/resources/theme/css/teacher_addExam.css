@@ -2,7 +2,9 @@ body {
     background-color: #F3EBF6;
     font-family: 'Ubuntu', sans-serif;
 }
-
+.title{
+    padding-top: 20px;
+}
 .main {
     background-color: #FFFFFF;
     width: 500px;

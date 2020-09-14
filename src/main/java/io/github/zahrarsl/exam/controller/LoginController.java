@@ -28,6 +28,11 @@ public class LoginController {
         this.academicUserService = academicUserService;
     }
 
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String forwardToLogin() {
+        return "forward:login";
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView getLogin() {
         return new ModelAndView("login");

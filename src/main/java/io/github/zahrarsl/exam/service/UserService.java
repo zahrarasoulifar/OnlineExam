@@ -14,12 +14,6 @@ import java.util.List;
 public class UserService {
     private UserDao userDao;
     private AcademicUserDao academicUserDao;
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @Autowired
     public void setUserDao(UserDao userDao) {

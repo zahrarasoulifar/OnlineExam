@@ -54,13 +54,12 @@ public class QuestionService {
     }
 
     @Transactional
-    public void saveDescriptiveQuestion(DescriptiveQuestion question,
-                                        String bankStatus, double point,
-                                        int examId, int courseId) {
+    public void saveDescriptiveQuestion(DescriptiveQuestion question, String bankStatus, Float point, int examId,
+                                        int courseId) {
         Course course = courseService.getCourse(courseId);
         question.setCourse(course);
 
-        Exam exam = examService.get(examId);
+        Exam exam = examService.getExamById(examId);
         question.setTeacher(exam.getTeacher());
 
         question = descriptiveQuestionDao.save(question);
@@ -69,8 +68,8 @@ public class QuestionService {
 
     @Transactional
     public void saveMultipleChoiceQuestion(MultipleChoiceQuestion question, String bankStatus,
-                                           double point , int examId, int courseId) {
-        Exam exam = examService.get(examId);
+                                           float point , int examId, int courseId) {
+        Exam exam = examService.getExamById(examId);
         question.setTeacher(exam.getTeacher());
 
         Course course = courseService.getCourse(courseId);
@@ -81,7 +80,7 @@ public class QuestionService {
     }
 
     public void saveQuestionProcess(Question question, String bankStatus,
-                             double point , int examId, int courseId) {
+                             Float point , int examId, int courseId) {
         Course course = courseService.getCourse(courseId);
         question.setCourse(course);
 

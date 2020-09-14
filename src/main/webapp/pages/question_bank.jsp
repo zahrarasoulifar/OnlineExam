@@ -5,6 +5,7 @@
 <head>
     <title>Title</title>
     <link href="<c:url value="/resources/css/question_bank.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/tables.css"/>" rel="stylesheet">
 </head>
 <body>
 <button onclick="location.href='/exam/teacher_edit_page/${examId}';">back</button><br><br>
@@ -53,7 +54,7 @@
                 alert(this.responseText);
             }
         };
-        xhttp.open("PUT", "/add_existed_question/" + examId +"/" + questionId +"/" + point, true);
+        xhttp.open("PUT", "/question/add_existed_question/" + examId +"/" + questionId +"/" + point, true);
         xhttp.send();
     }
 </script>

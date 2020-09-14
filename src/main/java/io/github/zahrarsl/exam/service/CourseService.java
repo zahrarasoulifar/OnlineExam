@@ -143,6 +143,17 @@ public class CourseService {
         }
     }
 
+    public List<Course> getCoursesByStudent(int studentId){
+        try {
+            Student student = studentService.getUser(studentId);
+            List<Course> courses = courseDao.getByStudent(student);
+            return courses;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public List<Exam> getCourseExams(int courseId){
         List<Exam> exams = courseDao.getById(courseId).getExams();
         return exams;

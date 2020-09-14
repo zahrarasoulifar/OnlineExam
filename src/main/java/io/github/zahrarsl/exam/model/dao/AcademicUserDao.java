@@ -19,7 +19,6 @@ public interface AcademicUserDao extends Repository<AcademicUser, Integer> , Jpa
     List<AcademicUser> findByAdminVerificationStatusIsFalseAndEmailVerificationStatusIsTrue();
     List<AcademicUser> findByAdminVerificationStatusIsTrueAndRoleEquals(String role);
     List<AcademicUser> findByAdminVerificationStatusIsTrue();
-    List<AcademicUser> findByRoleEquals(String role);
 
     @Modifying
     @Transactional

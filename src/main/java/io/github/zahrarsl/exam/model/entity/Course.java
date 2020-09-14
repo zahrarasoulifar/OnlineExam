@@ -17,9 +17,11 @@ public class Course {
     private String category;
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Teacher> teachers;
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Student> students;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "course")

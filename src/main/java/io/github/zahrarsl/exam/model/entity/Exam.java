@@ -26,11 +26,17 @@ public class Exam {
     @ManyToOne
     private Course course;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     @MapKeyJoinColumn(name = "question_id")
     @Column(name = "question_point")
     @JsonIgnore
-    private Map<Question, Double> questions;
+    private Map<Question, Float> questions;
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @MapKeyJoinColumn(name = "student_id")
+    @Column(name = "start_time")
+    @JsonIgnore
+    private Map<Student, Date> students;
 
     public Exam(String title, String description, int time, Date startDate, Date endDate) {
         this.title = title;
@@ -107,11 +113,11 @@ public class Exam {
         this.teacher = teacher;
     }
 
-    public Map<Question, Double> getQuestions() {
+    public Map<Question, Float> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(Map<Question, Double> questions) {
+    public void setQuestions(Map<Question, Float> questions) {
         this.questions = questions;
     }
 
@@ -123,14 +129,22 @@ public class Exam {
         this.course = course;
     }
 
+    public Map<Student, Date> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Map<Student, Date> students) {
+        this.students = students;
+    }
+
     @Override
     public String toString() {
-        return "Exam{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", time=" + time +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate ;
+        return "{" +
+                "id: " + id +
+                ", title: '" + title + '\'' +
+                ", description: '" + description + '\'' +
+                ", time: " + time +
+                ", startDate: " + startDate +
+                ", endDate: " + endDate + " }";
     }
 }

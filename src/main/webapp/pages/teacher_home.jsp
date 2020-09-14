@@ -4,17 +4,16 @@
 <html>
 <head>
     <link href="<c:url value="/resources/css/teacher_home.css"/>" rel="stylesheet">
-
+    <link href="<c:url value="/resources/css/tables.css"/>" rel="stylesheet">
 </head>
 <body>
 
 <div class="navbar" >
     <p class="main">hello ${user.firstName} !</p>
     <button onclick="location.href='/logout';">logout</button>
-    <button onclick="location.href='/teacher/home';">reload</button>
+    <button onclick="location.href='/teacher/home_page';">reload</button>
     <button onclick="location.href='/teacher/profile/' + ${user.id};">profile</button>
 </div>
-<h3 align="center">${user_state}</h3>
 <div>
     <table id="table">
         <tr>

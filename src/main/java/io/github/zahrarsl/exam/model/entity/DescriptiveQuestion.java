@@ -16,4 +16,5 @@ public class DescriptiveQuestion extends Question {
     public void setAnswer(Answer answer) {
         this.answer = answer;
     }
+
 }

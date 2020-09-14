@@ -1,5 +1,7 @@
 package io.github.zahrarsl.exam.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,13 +9,13 @@ import javax.persistence.*;
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String title;
-    private String content;
+    int id;
+    String title;
+    String content;
     @ManyToOne
-    private Teacher teacher;
+    Teacher teacher;
     @ManyToOne
-    private Course course;
+    Course course;
 
     public int getId() {
         return id;

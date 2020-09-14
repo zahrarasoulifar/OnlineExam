@@ -1,5 +1,7 @@
 package io.github.zahrarsl.exam.controller;
 
+import io.github.zahrarsl.exam.model.entity.Answer;
+import io.github.zahrarsl.exam.model.entity.MultipleChoiceQuestion;
 import io.github.zahrarsl.exam.model.entity.Question;
 import io.github.zahrarsl.exam.service.CourseService;
 import io.github.zahrarsl.exam.service.ExamService;
@@ -47,7 +49,7 @@ public class QuestionRestController {
     @PutMapping(value = "/add_existed_question/{examId}/{questionId}/{point}")
     public String addExistedQuestion(@PathVariable("examId") int examId,
                                      @PathVariable("questionId") int questionId,
-                                     @PathVariable("point") int point){
+                                     @PathVariable("point") float point){
         try {
             Question question = questionService.getQuestion(questionId);
             examService.addQuestion(question, examId, point);
@@ -62,11 +64,20 @@ public class QuestionRestController {
     public String editQuestion(@RequestBody Question question) {
         try {
             questionService.update(question);
-            return "updated.";
+            return "question updated.";
         } catch (Exception e) {
             e.printStackTrace();
-            return "update failed";
+            return "update failed.";
         }
+    }
 
+    @GetMapping(value = "/choices/{questionId}")
+    public List<Answer> getQuestionChoices(@PathVariable("questionId") int questionId) {
+        Question question = questionService.getQuestion(questionId);
+        if (question instanceof MultipleChoiceQuestion) {
+            return ((MultipleChoiceQuestion) question).getChoices();
+        } else {
+            return null;
+        }
     }
 }

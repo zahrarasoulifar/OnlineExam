@@ -5,6 +5,7 @@
     <title>Course</title>
     <link href="<c:url value="/resources/css/teacher_course.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/messages.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/tables.css"/>" rel="stylesheet">
 </head>
 <body>
 <div class="navbar" >
@@ -66,5 +67,6 @@
             window.open("/exam/teacher_edit_page/" + examId , "_self");
         }
     }
+
 </script>
 </html>

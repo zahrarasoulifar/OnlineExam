@@ -4,12 +4,14 @@
 <head>
     <title>Edit Exam!</title>
     <link href="<c:url value="/resources/css/teacher_exam.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/tables.css"/>" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="navbar" >
     <button onclick="location.href='/teacher/course/${exam.teacher.id}/${exam.course.id}';">back</button>
     <button onclick="deleteExam(${exam.id}, ${exam.teacher.id}, ${exam.course.id})">delete</button>
+    <button onclick="openUserAnswersPage(${exam.id})">check answers</button>
     <div class="dropdown">
         <button class="dropbtn">Add Question<br>
             <i class="fa fa-caret-down"></i>
@@ -96,7 +98,7 @@
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("total_point").textContent = this.responseText;
+                document.getElementById("total_point").textContent = parseFloat(this.responseText).toFixed(3);
             }
         };
         xhttp.open("GET", "http://localhost:8080/exam/total_point/" + examId, true);
@@ -152,6 +154,25 @@
         });
     }
 
+    function openUserAnswersPage(examId) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                console.log(data === true);
+
+                if (data === true) {
+                    window.open("/teacher/answers/" + examId, "_self");
+                }
+                else {
+                    alert("The exam is not over yet, you can see user answers only after the exam is finished!")
+                }
+
+            }
+        };
+        xhttp.open("GET", "http://localhost:8080/exam/is_finished/" + examId, true);
+        xhttp.send();
+    }
 
 </script>
 

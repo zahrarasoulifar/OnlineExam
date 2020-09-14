@@ -115,12 +115,8 @@ public class AcademicUserService {
         return teacherDao.findAll();
     }
 
-    public List<AcademicUser> getVerifiedTeacher(){
+    public List<AcademicUser> getVerifiedTeachers(){
         return academicUserDao.findByAdminVerificationStatusIsTrueAndRoleEquals("TEACHER");
-    }
-
-    public List<Student> getStudents(){
-        return studentDao.findAll();
     }
 
     public List<AcademicUser> getVerifiedStudents(){

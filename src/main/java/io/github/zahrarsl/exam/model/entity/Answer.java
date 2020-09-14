@@ -1,16 +1,14 @@
 package io.github.zahrarsl.exam.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Answer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String content;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    int id;
+    String content;
 
     public Answer() {
     }
