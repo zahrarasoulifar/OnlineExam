@@ -15,29 +15,47 @@ public class AcademicUserLoggingAspect {
 
     private static final Logger logger = LogManager.getLogger(AcademicUser.class);
 
-    @AfterReturning("academicUserSave()")
+    @AfterReturning("saveAcademicUser()")
     public void saveAspect(JoinPoint joinPoint){
         AcademicUser user = (AcademicUser)joinPoint.getArgs()[0];
         logger.info("user with email = " + user.getEmail() + " saved or updated.");
     }
 
-    @After("academicUserDelete()")
+    @AfterThrowing("saveAcademicUser()")
+    public void failingSaveAspect(JoinPoint joinPoint){
+        AcademicUser user = (AcademicUser)joinPoint.getArgs()[0];
+        logger.error("academic user with email = " + user.getEmail() + " failed to save or update.");
+    }
+
+    @AfterReturning("deleteAcademicUser()")
     public void deleteAspect(JoinPoint joinPoint){
         int id = (Integer)joinPoint.getArgs()[0];
         logger.info("user with id = " + id + " deleted.");
     }
 
-    @After("verifyUser()")
+    @AfterThrowing("deleteAcademicUser()")
+    public void failingDeleteAspect(JoinPoint joinPoint){
+        int id = (Integer)joinPoint.getArgs()[0];
+        logger.error("user with id = " + id + " failed to be deleted.");
+    }
+
+    @AfterReturning("verifyUser()")
     public void verifyAspect(JoinPoint joinPoint){
         int id = (Integer)joinPoint.getArgs()[0];
-        logger.info("user with id = " + id + " verified by admin.");
+        logger.info("user with id = " + id + " is verified by admin.");
+    }
+
+    @AfterThrowing("verifyUser()")
+    public void failingVerifyAspect(JoinPoint joinPoint){
+        int id = (Integer)joinPoint.getArgs()[0];
+        logger.info("user with id = " + id + " failed to be verified by admin.");
     }
 
     @Pointcut("execution(* io.github.zahrarsl.exam.service.AcademicUserService.save(..))")
-    public void academicUserSave(){}
+    public void saveAcademicUser(){}
 
     @Pointcut("execution(* io.github.zahrarsl.exam.model.dao.AcademicUserDao.delete*(..))")
-    public void academicUserDelete(){}
+    public void deleteAcademicUser(){}
 
     @Pointcut("execution(* io.github.zahrarsl.exam.model.dao.AcademicUserDao.setAdminVerification*())")
     public void verifyUser(){}
