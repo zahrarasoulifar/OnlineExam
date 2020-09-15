@@ -18,15 +18,15 @@
         <form:input class="un" path="title" name="title" required="required" placeholder="title"/>
         <form:textarea class="un" path="description" name="description" required="required" placeholder="description"/>
         <div align="center">
-            <form:label path="time" class="label" for="time">time(minutes):</form:label>
+            <form:label path="time" class="label" for="time">time(minutes)</form:label>
         </div>
         <form:input class="un" path="time" name="time" required="required" placeholder="time(minutes)"/><br>
         <div align="center">
-            <form:label path="startDate" class="label" for="startDate">start time:</form:label><br>
+            <form:label path="startDate" class="label" for="startDate">start time</form:label><br>
         </div>
         <input class="un" type="datetime-local" name="startDate" id="startDate"><br>
         <div align="center">
-            <form:label path="endDate" class="label" for="endDate">end time:</form:label>
+            <form:label path="endDate" class="label" for="endDate">end time</form:label>
         </div>
         <input class="un" type="datetime-local" name="endDate" id="endDate"><br>
         <form:button name="add">add exam</form:button>

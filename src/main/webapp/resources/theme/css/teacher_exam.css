@@ -21,27 +21,6 @@ button {
     cursor:pointer;
     font-weight: bold;
 }
-/*table {*/
-    /*overflow: hidden;*/
-    /*border-collapse: collapse;*/
-    /*width: 100%;*/
-    /*border-radius: 0.8em;*/
-    /*line-height: 3em;*/
-/*}*/
-
-/*th, td {*/
-    /*text-align: left;*/
-    /*padding: 8px;*/
-/*}*/
-
-/*tr:nth-child(even){*/
-    /*background-color: #dfdbdf;*/
-/*}*/
-
-/*th {*/
-    /*background-color : #E040FB;*/
-    /*color: white;*/
-/*}*/
 
 .dropdown {
     float: left;
