@@ -164,7 +164,7 @@
             if (time === 0){
                 alert("TIME'S UP!");
                 submitAnswer("${studentAnswer.id}");
-                window.open("/exam/exam_finished", "_self");
+                window.open("/exam/exam_finished/${student.id}", "_self");
             }
             var minute = Math.floor(time / 60);
             var second = time - (minute * 60);
@@ -175,7 +175,7 @@
 
     function finishExam() {
         submitAnswer("${studentAnswer.id}");
-        window.open("/exam/exam_finished", "_self");
+        window.open("/exam/exam_finished/${student.id}", "_self");
     }
 </script>
 

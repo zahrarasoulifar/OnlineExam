@@ -26,7 +26,7 @@
             <label class="label" for="no">NO</label>
             <input type="radio" id="no" name="bankStatus" value="NO">
         </div><br>
-        <input type="number" name="point" class="un" placeholder="question point">
+        <input type="number" name="point" min=0 step="any" class="un" placeholder="question point">
         <form:button name="add">add Question</form:button>
     </form:form>
 

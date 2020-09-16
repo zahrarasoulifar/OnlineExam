@@ -7,7 +7,7 @@
     <link href="<c:url value="/resources/css/tables.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/modal.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/body.css"/>" rel="stylesheet">
-    <link href="<c:url value="/resources/css/message.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/messages.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/buttons.css"/>" rel="stylesheet">
 </head>
 <body>
@@ -18,7 +18,7 @@
 </div>
 
 <div>
-    <h3>current</h3>
+    <h3>current exams</h3>
     <table id="current_exams">
 
     </table>
@@ -27,7 +27,7 @@
 
 
 <div>
-    <h3>future</h3>
+    <h3>future exams</h3>
     <table id="future_exams">
 
     </table>

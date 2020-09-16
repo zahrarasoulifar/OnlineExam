@@ -1,11 +1,13 @@
+body {
+    background-color: #f3ebf659;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 700;
+    color: #535453;
+}
+
 .admin_role {
     visibility: hidden;
 }
-body {
-    background-color: #F3EBF6;
-    font-family: 'Ubuntu', sans-serif;
-}
-
 
 .un {
     width: 76%;

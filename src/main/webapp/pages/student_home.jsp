@@ -11,7 +11,7 @@
 <body>
 <div align="right" class="navbar">
     <button onclick="location.href='/student/profile/' + ${user.id};">profile</button>
-    <button onclick="location.href='/student/home_page';">reload</button>
+    <button onclick="location.href='/student/home_page/${student.id}';">reload</button>
     <button onclick="location.href='/logout';">logout</button>
 </div>
 <table id="table">

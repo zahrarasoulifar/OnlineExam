@@ -15,14 +15,16 @@
     <p class="message">student: ${student.firstName}  ${student.lastName}</p>
     <p class="message">exam: ${exam.title}</p>
     <button onclick="location.href='/teacher/answers/${exam.id}';">back</button>
-</div><br><br>
+</div><br>
 
 <form>
     <h3><span>student total points : </span> <span id="total_point"></span></h3>
     <table id="table">
 
-    </table>
-    <button onclick="submitPoints()">submit points</button>
+    </table><br>
+    <div align="center">
+        <button onclick="submitPoints()" style="float: none;">submit points</button>
+    </div>
 </form>
 
 
@@ -88,7 +90,6 @@
             if (answer.point !== null && answer.point !== "") {
                 totalPoint += parseFloat(answer.point);
                 console.log("point:" + answer.point);
-                console.log("on: " + totalPoint);
             }
         }
         document.getElementById("total_point").textContent = totalPoint;

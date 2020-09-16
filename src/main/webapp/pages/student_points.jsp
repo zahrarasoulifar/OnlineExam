@@ -6,8 +6,12 @@
     <title>Points</title>
     <link href="<c:url value="/resources/css/body.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/tables.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/buttons.css"/>" rel="stylesheet">
 </head>
 <body>
+<div>
+    <button onclick="location.href='/student/home_page/${student.id}';">back</button>
+</div><br>
 <table id="table">
 
 </table>

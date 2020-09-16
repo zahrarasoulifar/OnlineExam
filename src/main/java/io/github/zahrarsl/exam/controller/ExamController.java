@@ -1,6 +1,7 @@
 package io.github.zahrarsl.exam.controller;
 
 import io.github.zahrarsl.exam.model.entity.Exam;
+import io.github.zahrarsl.exam.model.entity.Student;
 import io.github.zahrarsl.exam.service.CourseService;
 import io.github.zahrarsl.exam.service.ExamService;
 import io.github.zahrarsl.exam.service.StudentService;
@@ -117,13 +118,14 @@ public class ExamController {
             request.setAttribute("studentId", studentId);
             return "forward:/question/start";
         } else {
+            request.setAttribute("studentId", studentId);
             return "exam_finished";
         }
     }
 
-    @GetMapping(value = "/exam_finished")
-    public ModelAndView getExamFinishedPage(){
-        return new ModelAndView("exam_finished");
+    @GetMapping(value = "/exam_finished/{studentId}")
+    public ModelAndView getExamFinishedPage(@PathVariable("studentId") int studentId){
+        return new ModelAndView("exam_finished", "studentId", studentId);
     }
 
 }

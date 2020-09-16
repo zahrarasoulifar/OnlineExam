@@ -157,8 +157,6 @@ public class QuestionController {
             }
 
             String type = "";
-            System.out.println("qqqqqqqqqq: " + question);
-            System.out.println(question.getClass());
             if (question instanceof DescriptiveQuestion)
                 type = "descriptive";
             else if (question instanceof MultipleChoiceQuestion)

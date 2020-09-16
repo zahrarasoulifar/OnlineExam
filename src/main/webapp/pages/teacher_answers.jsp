@@ -6,13 +6,14 @@
     <title>Student answers</title>
     <link href="<c:url value="/resources/css/body.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/tables.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/buttons.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/messages.css"/>" rel="stylesheet">
 </head>
 <body>
 <div id="navbar">
+    <span>Exam : ${exam.title}</span>
     <button onclick="location.href='/exam/teacher_edit_page/${exam.id}';">back</button>
 </div>
-${exam}
-
 <br>
 <table id="table">
 

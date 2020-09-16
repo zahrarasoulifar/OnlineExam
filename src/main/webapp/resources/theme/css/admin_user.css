@@ -1,3 +1,10 @@
+body {
+    background-color: #f3ebf659;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 700;
+    color: #535453;
+}
+
 #edit_container{
     visibility: hidden;
 }
@@ -18,11 +25,6 @@ li {
 
 li:last-child {
     border: none;
-}
-
-body {
-    background-color: #F3EBF6;
-    font-family: 'Ubuntu', sans-serif;
 }
 
 button {

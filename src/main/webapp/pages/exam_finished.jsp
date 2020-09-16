@@ -16,7 +16,7 @@
 </div>
 <br>
 <div align="center">
-    <button style="float: none">Back To course page</button>
+    <button style="float: none" onclick="location.href='/student/home_page/${studentId}';">Back To Home page</button>
 </div>
 </body>
 </html>

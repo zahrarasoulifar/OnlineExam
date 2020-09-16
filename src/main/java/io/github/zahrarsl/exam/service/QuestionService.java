@@ -62,8 +62,9 @@ public class QuestionService {
         Exam exam = examService.getExamById(examId);
         question.setTeacher(exam.getTeacher());
 
+        System.out.println(question.toString());
         question = descriptiveQuestionDao.save(question);
-        saveQuestionProcess(question, bankStatus, point, examId, courseId);
+        saveQuestion(question, bankStatus, point, examId, course);
     }
 
     @Transactional
@@ -76,13 +77,13 @@ public class QuestionService {
         question.setCourse(course);
 
         question = multipleChoiceQuestionDao.save(question);
-        saveQuestionProcess(question, bankStatus, point, examId, courseId);
+        saveQuestion(question, bankStatus, point, examId, course);
     }
 
-    public void saveQuestionProcess(Question question, String bankStatus,
-                             Float point , int examId, int courseId) {
-        Course course = courseService.getCourse(courseId);
-        question.setCourse(course);
+    public void saveQuestion(Question question, String bankStatus,
+                                    Float point , int examId, Course course) {
+//        Course course = courseService.getCourse(courseId);
+//        question.setCourse(course);
 
         if (bankStatus.equals("YES")){
             course.getQuestionBank().add(question);

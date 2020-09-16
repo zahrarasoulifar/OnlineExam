@@ -45,9 +45,9 @@
     }
 
     function showData(data) {
-        var table = '<tr> <th>Title</th> <th>Time</th> <th>Start</th> <th>End</th><th> </th></tr>';
+        var table = '<tr style="cursor: unset"> <th>Title</th> <th>Time</th> <th>Start</th> <th>End</th><th> </th></tr>';
         data.map(value =>
-        table += '<tr id="' + value.id + '"><td> ' + value.title +
+        table += '<tr  style="cursor: unset" id="' + value.id + '"><td> ' + value.title +
             '</td><td>' + value.time + '</td><td>'
             + new Date(value.startDate).toLocaleDateString() + ' '
             + new Date(value.startDate).toLocaleTimeString() + '</td><td>'

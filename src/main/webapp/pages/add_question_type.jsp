@@ -6,8 +6,9 @@
     <title>choose question type:</title>
     <link href="<c:url value="/resources/css/buttons.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/messages.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/body.css"/>" rel="stylesheet">
 </head>
-<body style="background-color: #F3EBF6;">
+<body>
 <div align="center">
     <p class="message" style="margin: 20vh; display: block">Choose your question type!</p>
 

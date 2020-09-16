@@ -11,7 +11,7 @@
 <div class="navbar" >
     <p class="main">hello ${user.firstName} !</p>
     <button onclick="location.href='/logout';">logout</button>
-    <button onclick="location.href='/teacher/home_page';">reload</button>
+    <button onclick="location.href='/teacher/home_page/${user.id}';">reload</button>
     <button onclick="location.href='/teacher/profile/' + ${user.id};">profile</button>
 </div>
 <div>

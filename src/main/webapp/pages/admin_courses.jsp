@@ -16,9 +16,9 @@
 <div class="form_container">
     <div id="message" align="center">${message}</div>
     <form:form modelAttribute="course" action="/course/" method="post">
-    <form:input path="title" name="title" required="required" placeholder="course title"/>
-    <form:input path="number" name="number" required="required" placeholder="course number"/>
-    <form:input path="category" name="category" required="required" placeholder="category"/>
+    <form:input path="title" class="search_input" name="title" required="required" placeholder="course title"/>
+    <form:input path="number" class="search_input" name="number" required="required" placeholder="course number"/>
+    <form:input path="category" class="search_input" name="category" required="required" placeholder="category"/>
 
     <form:button name="add">add</form:button>
 </form:form>
