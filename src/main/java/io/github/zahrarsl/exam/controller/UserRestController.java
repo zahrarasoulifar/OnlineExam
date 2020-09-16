@@ -56,9 +56,20 @@ public class UserRestController {
             return false;
     }
 
-    @RequestMapping(value = "/getUnverifiedUsers", produces = "application/json")
-    public List<AcademicUser> getUnverifiedUsers(){
-        List<AcademicUser> unverifiedUsers = userService.getUnverifiedUsers();
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PutMapping(value = "/verify_list")
+    public boolean verifyUsers(@RequestBody List<Integer> idList){
+        if (idList != null) {
+            return userService.verifyUsers(idList);
+        }
+        else
+            return false;
+    }
+
+    @RequestMapping(value = "/getUnverifiedUsers/{pageNumber}/{limit}", produces = "application/json")
+    public List<AcademicUser> getUnverifiedUsers(@PathVariable("pageNumber") int pageNumber,
+                                                 @PathVariable("limit") int limit){
+        List<AcademicUser> unverifiedUsers = userService.getUnverifiedUsers(pageNumber - 1, limit);
         return unverifiedUsers;
     }
 }

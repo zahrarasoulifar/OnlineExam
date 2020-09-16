@@ -11,7 +11,7 @@
 <body>
 <div align="right">
     <button onclick="loadDoc()">reload</button>
-    <button onclick="location.href='/admin/home';">back</button>
+    <button onclick="location.href='/admin/home/1';">back</button>
 </div>
 <div class="form_container">
     <div id="message" align="center">${message}</div>

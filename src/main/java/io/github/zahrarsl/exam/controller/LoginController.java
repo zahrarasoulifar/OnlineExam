@@ -49,6 +49,7 @@ public class LoginController {
                 switch (user.getRole()) {
                     case "ADMIN":
                         modelAndView = new ModelAndView("admin_home", "user", user);
+                        modelAndView.addObject("pageNumber", 1);
                         break;
                     case "TEACHER":
                         modelAndView = new ModelAndView("teacher_home", "user", user);

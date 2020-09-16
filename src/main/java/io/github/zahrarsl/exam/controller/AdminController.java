@@ -101,11 +101,13 @@ public class AdminController {
         }
     }
 
-    @RequestMapping(value = "/home")
-    public ModelAndView getAdminHome(){
+    @RequestMapping(value = "/home/{pageNumber}")
+    public ModelAndView getAdminHome(@PathVariable("pageNumber") int pageNumber){
         Admin admin = new Admin();
         admin.setFirstName("Admin");
-        return new ModelAndView("admin_home", "user", admin);
+        ModelAndView modelAndView = new ModelAndView("admin_home", "user", admin);
+        modelAndView.addObject("pageNumber", pageNumber);
+        return modelAndView;
     }
 
 }

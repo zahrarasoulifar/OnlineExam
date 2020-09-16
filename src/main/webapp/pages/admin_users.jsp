@@ -12,7 +12,7 @@
 <body>
 <div align="right">
     <button onclick="location.href='/admin/signup_page';">add user</button>
-    <button onclick="location.href='/admin/home';">back</button>
+    <button onclick="location.href='/admin/home/1';">back</button>
 </div>
 <div class="form_container" align="center">
         <input id="firstName" name="firstName" placeholder="first name"/>

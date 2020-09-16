@@ -37,7 +37,7 @@ button {
 
 button:disabled,
 button[disabled]{
-    background-color: #e0a3e4;
+    background: linear-gradient(to right, #d228e6, #f2a8fb);
 }
 
 #question {

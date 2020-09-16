@@ -41,6 +41,28 @@ button {
     justify-content: center;
 }
 
+.paging_btn {
+    margin: 18px;
+    padding: 4px 15px 10px;
+    font-size: 17px;
+    font-weight: 900;
+    border-radius: 50%;
+    background: linear-gradient(#aeacae, #aeacae);
+}
+
+.paging_btn:disabled,
+.paging_btn[disabled]{
+    background: linear-gradient(to right, #d1cfd1, #d1cfd1);
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
 
 @media (max-width: 600px) {
     .main {
