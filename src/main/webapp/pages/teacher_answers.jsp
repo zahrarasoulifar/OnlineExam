@@ -11,7 +11,7 @@
 </head>
 <body>
 <div id="navbar">
-    <span>Exam : ${exam.title}</span>
+    <span class="message">Exam : ${exam.title}</span>
     <button onclick="location.href='/exam/teacher_edit_page/${exam.id}';">back</button>
 </div>
 <br>

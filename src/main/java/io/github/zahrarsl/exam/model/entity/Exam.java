@@ -27,7 +27,7 @@ public class Exam {
     private Course course;
 
     @ElementCollection(fetch = FetchType.LAZY)
-    @MapKeyJoinColumn(name = "question_id")
+    @MapKeyJoinColumn(name = "key_id")
     @Column(name = "question_point")
     @JsonIgnore
     private Map<Question, Float> questions;

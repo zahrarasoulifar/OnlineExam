@@ -13,7 +13,7 @@
 <body>
 <div class="navbar" >
     <p class="message">${course.title}</p>
-    <button onclick="location.href='/student/home/${exam.teacher.id}/${exam.course.id}';">back</button>
+    <button onclick="location.href='/student/home_page/${user.id}';">back</button>
     <button onclick="location.href='/student/points/${user.id}';">points</button>
 </div>
 
@@ -136,12 +136,10 @@
             if (this.readyState == 4 && this.status == 200) {
                 var data = JSON.parse(this.responseText);
                 console.log(data);
-                showExamData(data);
-                showData(data, "future_exams");
-                addModalHandler("future_exams");
+
             }
         };
-        xhttp.open("GET", "http://localhost:8080/exam/" + examId, true);
+        xhttp.open("GET", "http://localhost:8080/" + examId, true);
         xhttp.send();
     }
 

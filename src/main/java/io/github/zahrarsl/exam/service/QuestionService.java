@@ -82,9 +82,6 @@ public class QuestionService {
 
     public void saveQuestion(Question question, String bankStatus,
                                     Float point , int examId, Course course) {
-//        Course course = courseService.getCourse(courseId);
-//        question.setCourse(course);
-
         if (bankStatus.equals("YES")){
             course.getQuestionBank().add(question);
             courseService.save(course);

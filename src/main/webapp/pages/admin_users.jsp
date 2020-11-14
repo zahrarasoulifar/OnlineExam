@@ -74,8 +74,7 @@
             contentType : 'application/json; charset=utf-8',
             dataType : 'json',
             url : "http://localhost:8080/academic/search/0/10",
-            data :
-                JSON.stringify(search),
+            data : JSON.stringify(search),
             success : function(result) {
                 showData(result);
             },

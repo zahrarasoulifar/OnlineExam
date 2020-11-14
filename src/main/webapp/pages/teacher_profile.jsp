@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>profile</title>
-    <link href="<c:url value="/resources/css/profile.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/body.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/lists.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/buttons.css"/>" rel="stylesheet">
 </head>
